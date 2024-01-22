@@ -27,6 +27,13 @@ Describe why they fulfill the criteria above in the pull request.
 If there is more than one URL in your pull request, please describe how they are
 related. If they aren't related, please make additional pull requests.
 
+Entries should be:
+- unique
+- alphabetical
+- as broad in scope as is appropriate
+- not begin with www or m subdomains
+- not begin with protocol prefixes (`http://`, `https://`)
+
 ## Removal Requests
 
 Please make a pull request using the template for removing domains or URLs from the list.

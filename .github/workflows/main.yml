@@ -1,0 +1,29 @@
+name: Validate contents of diffusion-output-list
+on:
+  push
+jobs:
+  Validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Unique
+        uses: norwd/grawk@v1
+        if: success() || failure()
+        with:
+          program: 'a[$0]++{exit(1)}'
+          input-file: diffusion-output-list
+      - name: Alphabetical
+        if: success() || failure()
+        run: sort -c diffusion-output-list
+      - name: No WWW prefix
+        if: success() || failure()
+        run: bash -c "! grep '^www\.' diffusion-output-list"
+      - name: No M (mobile) prefix
+        if: success() || failure()
+        run: bash -c "! grep '^m\.' diffusion-output-list"
+      - name: No HTTP(s) prefix
+        if: success() || failure()
+        run: bash -c "! grep '^https*://' diffusion-output-list"
+
